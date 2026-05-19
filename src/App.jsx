@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react';
 import profileImage from './Assets/profile.jpg';
 import { portfolio } from './content';
 
-const projectPreviewImages = import.meta.glob('./Assets/projects/previews/**/*.jpg', {
+const projectPreviewImages = import.meta.glob('./Assets/projects/portfolio-previews/**/*.jpg', {
   eager: true,
   import: 'default'
 });
@@ -25,7 +25,7 @@ const projectPreviewImages = import.meta.glob('./Assets/projects/previews/**/*.j
 const getProjectPages = (project) =>
   Array.from({ length: project.pageCount }, (_, index) => {
     const page = String(index + 1).padStart(2, '0');
-    return projectPreviewImages[`./Assets/projects/previews/${project.slug}/page-${page}.jpg`];
+    return projectPreviewImages[`./Assets/projects/portfolio-previews/${project.slug}/page-${page}.jpg`];
   }).filter(Boolean);
 
 const getNavId = (item) => item.toLowerCase().replace(/\s+/g, '-');
@@ -331,8 +331,12 @@ function Projects() {
               </div>
               <div className="project-feature-content">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-clay">
-                  {carouselProject.category}
+                  Portfolio Preview
                 </p>
+                <div className="project-tag-row">
+                  <span className="project-category-tag">{carouselProject.filterCategory}</span>
+                  <span className="project-category-meta">{carouselProject.category}</span>
+                </div>
                 <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
                   {carouselProject.title}
                 </h3>
@@ -366,8 +370,12 @@ function Projects() {
               </div>
               <div className="project-feature-content">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-clay">
-                  {activeCategory}
+                  Portfolio Preview
                 </p>
+                <div className="project-tag-row">
+                  <span className="project-category-tag">{activeCategory}</span>
+                  <span className="project-category-meta">Portfolio preview</span>
+                </div>
                 <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
                   Sample work placeholder
                 </h3>
@@ -402,8 +410,9 @@ function Projects() {
             <div className="lightbox-header">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-clay">
-                  {activeProject.category}
+                  {activeProject.filterCategory}
                 </p>
+                <p className="mt-1 text-sm text-ivory/55">{activeProject.category}</p>
                 <h3 className="mt-1 text-2xl font-semibold text-ivory">{activeProject.title}</h3>
               </div>
               <div className="flex items-center gap-2">
