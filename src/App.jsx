@@ -28,11 +28,23 @@ const getProjectPages = (project) =>
   }).filter(Boolean);
 
 const getSampleImage = (work) => {
+  if (!work.slug || !work.page) {
+    return null;
+  }
+
   const page = String(work.page).padStart(2, '0');
   return projectPreviewImages[`./Assets/projects/previews/${work.slug}/page-${page}.jpg`];
 };
 
 const getNavId = (item) => item.toLowerCase().replace(/\s+/g, '-');
+
+const getPlaceholderWorks = (category) =>
+  Array.from({ length: 3 }, (_, index) => ({
+    title: `${category} Sample ${index + 1}`,
+    description:
+      'Placeholder card reserved for future sample work. Add an image, title, and description in the sampleWorks data when ready.',
+    isPlaceholder: true
+  }));
 
 const SectionLabel = ({ children }) => (
   <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-clay">
@@ -393,8 +405,11 @@ function SampleWorks() {
   const categories = Object.keys(portfolio.sampleWorks);
   const [activeCategory, setActiveCategory] = useState(categories[0]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const works = portfolio.sampleWorks[activeCategory];
+  const categoryWorks = portfolio.sampleWorks[activeCategory];
+  const hasWorks = categoryWorks.length > 0;
+  const works = hasWorks ? categoryWorks : getPlaceholderWorks(activeCategory);
   const activeWork = works[activeIndex];
+  const activeImage = getSampleImage(activeWork);
 
   useEffect(() => {
     setActiveIndex(0);
@@ -453,13 +468,19 @@ function SampleWorks() {
             <ChevronLeft size={22} />
           </button>
           <article className="sample-card" key={`${activeCategory}-${activeWork.title}`}>
-            <div className="sample-image-wrap watermark-surface">
-              <img
-                src={getSampleImage(activeWork)}
-                alt={`${activeWork.title} sample work`}
-                draggable="false"
-                onContextMenu={(event) => event.preventDefault()}
-              />
+            <div className={`sample-image-wrap ${activeImage ? 'watermark-surface' : ''}`}>
+              {activeImage ? (
+                <img
+                  src={activeImage}
+                  alt={`${activeWork.title} sample work`}
+                  draggable="false"
+                  onContextMenu={(event) => event.preventDefault()}
+                />
+              ) : (
+                <div className="sample-placeholder-visual">
+                  <span>Sample image coming soon</span>
+                </div>
+              )}
             </div>
             <div className="sample-content">
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-clay">
@@ -468,6 +489,11 @@ function SampleWorks() {
               <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
                 {activeWork.title}
               </h3>
+              {activeWork.isPlaceholder && (
+                <p className="mt-3 inline-flex w-fit rounded-full border border-clay/50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-clay">
+                  Placeholder
+                </p>
+              )}
               <p className="mt-4 leading-8 text-ivory/70">{activeWork.description}</p>
               <div className="mt-6 flex items-center gap-2">
                 {works.map((work, index) => (

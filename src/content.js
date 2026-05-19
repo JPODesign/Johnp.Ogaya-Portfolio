@@ -207,46 +207,8 @@ export const portfolio = {
         description: 'Cabinetry presentation with refined proportions, storage planning, and build details.'
       }
     ],
-    Exterior: [
-      {
-        title: 'Circular Planter Feature',
-        slug: 'circular-planter',
-        page: 1,
-        description: 'Curved feature joinery concept prepared with visual references and fabrication notes.'
-      },
-      {
-        title: 'L-Shape Wall Panel',
-        slug: 'l-shape-wall-panel',
-        page: 1,
-        description: 'Architectural panel package with dimensional coordination and finish intent.'
-      },
-      {
-        title: 'Arch Wall Panel',
-        slug: 'arch-wall-panel',
-        page: 1,
-        description: 'Statement wall panel detail combining shaped profiles with technical documentation.'
-      }
-    ],
-    Bathroom: [
-      {
-        title: 'Vanity-Ready Storage Detail',
-        slug: 'desk',
-        page: 1,
-        description: 'Compact storage detailing with clean construction notes and presentation-ready visuals.'
-      },
-      {
-        title: 'Cabinetry Detail Study',
-        slug: 'open-bookcase',
-        page: 1,
-        description: 'Joinery drawing sample focused on layout, shelving rhythm, and production clarity.'
-      },
-      {
-        title: 'Cornice and Skirting Detail',
-        slug: 'cornice-skirting',
-        page: 1,
-        description: 'Interior finish detail package for coordinated installation and precise transitions.'
-      }
-    ],
+    Exterior: [],
+    Bathroom: [],
     'Technical Detailing': [
       {
         title: 'Bed Frame Drawing Set',
