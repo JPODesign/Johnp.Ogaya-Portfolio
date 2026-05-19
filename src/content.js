@@ -11,6 +11,7 @@ export const portfolio = {
     { label: 'WhatsApp', href: 'https://wa.me/639560375437' }
   ],
   nav: ['About', 'Skills', 'Experience', 'Projects', 'Contact'],
+  projectCategories: ['Interior', 'Exterior', 'Bathroom', 'Technical Drawings'],
   about: {
     heading: 'About Me',
     body:
@@ -101,6 +102,7 @@ export const portfolio = {
       title: 'Cafe Bar',
       slug: 'cafe-bar',
       category: 'Joinery Detail',
+      filterCategory: 'Interior',
       pageCount: 5,
       description:
         'A custom cafe bar drawing package with rendered presentation views and technical production sheets.'
@@ -109,6 +111,7 @@ export const portfolio = {
       title: 'Circular Planter',
       slug: 'circular-planter',
       category: 'Feature Joinery',
+      filterCategory: 'Technical Drawings',
       pageCount: 4,
       description:
         'Curved planter design with visual reference imagery and CNC-ready detailing for fabrication.'
@@ -117,6 +120,7 @@ export const portfolio = {
       title: 'Reception Desk',
       slug: 'reception-desk',
       category: 'Furniture Detail',
+      filterCategory: 'Interior',
       pageCount: 4,
       description:
         'Reception desk design package combining clean rendered visuals with measured construction drawings.'
@@ -125,6 +129,7 @@ export const portfolio = {
       title: 'Bed Frame',
       slug: 'bed-frame',
       category: 'Furniture Detail',
+      filterCategory: 'Technical Drawings',
       pageCount: 3,
       description:
         'Bedroom furniture technical drawings prepared for review, coordination, and production handoff.'
@@ -133,6 +138,7 @@ export const portfolio = {
       title: 'Desk',
       slug: 'desk',
       category: 'Furniture Detail',
+      filterCategory: 'Technical Drawings',
       pageCount: 3,
       description:
         'Desk joinery design with rendered preview imagery and detailed drawing sheets for fabrication.'
@@ -141,6 +147,7 @@ export const portfolio = {
       title: 'Open Bookcase',
       slug: 'open-bookcase',
       category: 'Cabinetry Detail',
+      filterCategory: 'Interior',
       pageCount: 4,
       description:
         'Open bookcase design package showing proportions, shelving layout, and construction details.'
@@ -149,6 +156,7 @@ export const portfolio = {
       title: 'Library Cabinet',
       slug: 'library-cabinet',
       category: 'Cabinetry Detail',
+      filterCategory: 'Interior',
       pageCount: 11,
       description:
         'Library cabinet drawing package with rendered furniture views and detailed production sheets.'
@@ -157,6 +165,7 @@ export const portfolio = {
       title: 'L-Shape Wall Panel',
       slug: 'l-shape-wall-panel',
       category: 'Wall Panel Detail',
+      filterCategory: 'Technical Drawings',
       pageCount: 3,
       description:
         'L-shaped wall panel detail with visual material direction and technical drawing documentation.'
@@ -165,6 +174,7 @@ export const portfolio = {
       title: 'Arch Wall Panel',
       slug: 'arch-wall-panel',
       category: 'Wall Panel Detail',
+      filterCategory: 'Technical Drawings',
       pageCount: 3,
       description:
         'Arch wall panel concept with warm timber detailing and coordinated sheet documentation.'
@@ -173,6 +183,7 @@ export const portfolio = {
       title: 'Straight Wall Panel',
       slug: 'straight-wall-panel',
       category: 'Wall Panel Detail',
+      filterCategory: 'Technical Drawings',
       pageCount: 2,
       description:
         'Straight wall panel technical package focused on elevation, proportions, and build details.'
@@ -181,6 +192,7 @@ export const portfolio = {
       title: 'Cornice and Skirting',
       slug: 'cornice-skirting',
       category: 'Interior Detail',
+      filterCategory: 'Interior',
       pageCount: 2,
       description:
         'Cornice and skirting detailing package for coordinated interior joinery installation.'

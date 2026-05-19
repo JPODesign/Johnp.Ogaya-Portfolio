@@ -1,6 +1,7 @@
 import {
   ArrowUpRight,
   BriefcaseBusiness,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Mail,
@@ -223,19 +224,27 @@ function Projects() {
   const [activeProject, setActiveProject] = useState(null);
   const [activePage, setActivePage] = useState(0);
   const [zoom, setZoom] = useState(1);
+  const [activeCategory, setActiveCategory] = useState(portfolio.projectCategories[0]);
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const filteredProjects = portfolio.projects.filter(
+    (project) => project.filterCategory === activeCategory
+  );
   const activePages = activeProject ? getProjectPages(activeProject) : [];
   const activeImage = activePages[activePage];
-  const carouselProject = portfolio.projects[carouselIndex];
-  const carouselPages = getProjectPages(carouselProject);
+  const carouselProject = filteredProjects[carouselIndex];
+  const carouselPages = carouselProject ? getProjectPages(carouselProject) : [];
+
+  useEffect(() => {
+    setCarouselIndex(0);
+  }, [activeCategory]);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      setCarouselIndex((index) => (index + 1) % portfolio.projects.length);
+      setCarouselIndex((index) => (index + 1) % Math.max(filteredProjects.length, 1));
     }, 5200);
 
     return () => window.clearInterval(timer);
-  }, []);
+  }, [filteredProjects.length]);
 
   const openProject = (project) => {
     setActiveProject(project);
@@ -254,7 +263,7 @@ function Projects() {
   };
 
   const goToProject = (index) => {
-    setCarouselIndex((index + portfolio.projects.length) % portfolio.projects.length);
+    setCarouselIndex((index + filteredProjects.length) % filteredProjects.length);
   };
 
   return (
@@ -265,11 +274,31 @@ function Projects() {
             Projects
           </p>
           <h2 className="font-display text-4xl text-ivory md:text-5xl">
-            Rotating technical drawings and joinery works.
+            Design, Rendering &amp; Technical Detailing
           </h2>
           <p className="mt-4 text-ivory/70">
             Selected renderings, production details, and technical drawing packages showcasing recent work completed
           </p>
+          <div className="project-filter">
+            <label className="project-filter-label" htmlFor="project-category">
+              Category
+            </label>
+            <div className="project-select-wrap">
+              <select
+                id="project-category"
+                className="project-select"
+                value={activeCategory}
+                onChange={(event) => setActiveCategory(event.target.value)}
+              >
+                {portfolio.projectCategories.map((category) => (
+                  <option value={category} key={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="project-select-icon" size={18} />
+            </div>
+          </div>
         </div>
 
         <div className="project-carousel">
@@ -277,59 +306,90 @@ function Projects() {
             type="button"
             className="project-carousel-arrow left-3"
             onClick={() => goToProject(carouselIndex - 1)}
+            disabled={!carouselProject}
             aria-label="Previous project"
           >
             <ChevronLeft size={22} />
           </button>
-          <article className="project-feature-card" key={carouselProject.title}>
-            <div className="project-feature-media">
-              <button
-                type="button"
-                className="project-feature-image watermark-surface"
-                onClick={() => openProject(carouselProject)}
-                aria-label={`Preview ${carouselProject.title}`}
-              >
-                <img
-                  src={carouselPages[0]}
-                  alt={`${carouselProject.title} preview`}
-                  draggable="false"
-                  onContextMenu={(event) => event.preventDefault()}
-                />
-                <span className="project-page-count">{carouselPages.length} preview pages</span>
-              </button>
-            </div>
-            <div className="project-feature-content">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-clay">
-                {carouselProject.category}
-              </p>
-              <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
-                {carouselProject.title}
-              </h3>
-              <p className="mt-4 leading-8 text-ivory/70">{carouselProject.description}</p>
-              <button
-                type="button"
-                className="project-open-button"
-                onClick={() => openProject(carouselProject)}
-              >
-                Open Preview <ZoomIn size={17} />
-              </button>
-              <div className="mt-6 flex flex-wrap items-center gap-2">
-                {portfolio.projects.map((project, index) => (
+          {carouselProject ? (
+            <article className="project-feature-card" key={carouselProject.title}>
+              <div className="project-feature-media">
+                <button
+                  type="button"
+                  className="project-feature-image watermark-surface"
+                  onClick={() => openProject(carouselProject)}
+                  aria-label={`Preview ${carouselProject.title}`}
+                >
+                  <img
+                    src={carouselPages[0]}
+                    alt={`${carouselProject.title} preview`}
+                    draggable="false"
+                    onContextMenu={(event) => event.preventDefault()}
+                  />
+                  <span className="project-page-count">{carouselPages.length} preview pages</span>
+                </button>
+              </div>
+              <div className="project-feature-content">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-clay">
+                  {carouselProject.category}
+                </p>
+                <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
+                  {carouselProject.title}
+                </h3>
+                <p className="mt-4 leading-8 text-ivory/70">{carouselProject.description}</p>
+                <button
+                  type="button"
+                  className="project-open-button"
+                  onClick={() => openProject(carouselProject)}
+                >
+                  Open Preview <ZoomIn size={17} />
+                </button>
+                <div className="mt-6 flex flex-wrap items-center gap-2">
+                  {filteredProjects.map((project, index) => (
+                    <button
+                      type="button"
+                      className={`project-carousel-dot ${index === carouselIndex ? 'is-active' : ''}`}
+                      key={project.title}
+                      onClick={() => goToProject(index)}
+                      aria-label={`Show ${project.title}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </article>
+          ) : (
+            <article className="project-feature-card" key={`${activeCategory}-placeholder`}>
+              <div className="project-feature-media">
+                <div className="project-placeholder-visual">
+                  <span>{activeCategory} samples coming soon</span>
+                </div>
+              </div>
+              <div className="project-feature-content">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-clay">
+                  {activeCategory}
+                </p>
+                <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
+                  Sample work placeholder
+                </h3>
+                <p className="mt-4 leading-8 text-ivory/70">
+                  This category is ready for future uploaded previews. Add project images to the
+                  project data and they will appear in this filtered carousel.
+                </p>
+                <div className="mt-6 flex flex-wrap items-center gap-2">
                   <button
                     type="button"
-                    className={`project-carousel-dot ${index === carouselIndex ? 'is-active' : ''}`}
-                    key={project.title}
-                    onClick={() => goToProject(index)}
-                    aria-label={`Show ${project.title}`}
+                    className="project-carousel-dot is-active"
+                    aria-label={`${activeCategory} placeholder`}
                   />
-                ))}
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+          )}
           <button
             type="button"
             className="project-carousel-arrow right-3"
             onClick={() => goToProject(carouselIndex + 1)}
+            disabled={!carouselProject}
             aria-label="Next project"
           >
             <ChevronRight size={22} />
