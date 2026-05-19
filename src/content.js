@@ -10,7 +10,7 @@ export const portfolio = {
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/john-paulo-ogaya-ab1517237/' },
     { label: 'WhatsApp', href: 'https://wa.me/639560375437' }
   ],
-  nav: ['About', 'Skills', 'Experience', 'Projects', 'Contact'],
+  nav: ['About', 'Skills', 'Experience', 'Projects', 'Sample Works', 'Contact'],
   about: {
     heading: 'About Me',
     body:
@@ -185,5 +185,87 @@ export const portfolio = {
       description:
         'Cornice and skirting detailing package for coordinated interior joinery installation.'
     }
-  ]
+  ],
+  sampleWorks: {
+    Interior: [
+      {
+        title: 'Cafe Bar Joinery',
+        slug: 'cafe-bar',
+        page: 1,
+        description: 'Rendered joinery package with warm finishes and production-ready presentation sheets.'
+      },
+      {
+        title: 'Reception Desk Concept',
+        slug: 'reception-desk',
+        page: 1,
+        description: 'Clean front-of-house furniture detailing with measured views and material direction.'
+      },
+      {
+        title: 'Library Cabinet Design',
+        slug: 'library-cabinet',
+        page: 1,
+        description: 'Cabinetry presentation with refined proportions, storage planning, and build details.'
+      }
+    ],
+    Exterior: [
+      {
+        title: 'Circular Planter Feature',
+        slug: 'circular-planter',
+        page: 1,
+        description: 'Curved feature joinery concept prepared with visual references and fabrication notes.'
+      },
+      {
+        title: 'L-Shape Wall Panel',
+        slug: 'l-shape-wall-panel',
+        page: 1,
+        description: 'Architectural panel package with dimensional coordination and finish intent.'
+      },
+      {
+        title: 'Arch Wall Panel',
+        slug: 'arch-wall-panel',
+        page: 1,
+        description: 'Statement wall panel detail combining shaped profiles with technical documentation.'
+      }
+    ],
+    Bathroom: [
+      {
+        title: 'Vanity-Ready Storage Detail',
+        slug: 'desk',
+        page: 1,
+        description: 'Compact storage detailing with clean construction notes and presentation-ready visuals.'
+      },
+      {
+        title: 'Cabinetry Detail Study',
+        slug: 'open-bookcase',
+        page: 1,
+        description: 'Joinery drawing sample focused on layout, shelving rhythm, and production clarity.'
+      },
+      {
+        title: 'Cornice and Skirting Detail',
+        slug: 'cornice-skirting',
+        page: 1,
+        description: 'Interior finish detail package for coordinated installation and precise transitions.'
+      }
+    ],
+    'Technical Detailing': [
+      {
+        title: 'Bed Frame Drawing Set',
+        slug: 'bed-frame',
+        page: 1,
+        description: 'Furniture technical package prepared for review, coordination, and fabrication handoff.'
+      },
+      {
+        title: 'Straight Wall Panel',
+        slug: 'straight-wall-panel',
+        page: 1,
+        description: 'Measured elevation and detail sample focused on proportions and build intent.'
+      },
+      {
+        title: 'Reception Desk Sheet',
+        slug: 'reception-desk',
+        page: 2,
+        description: 'Production detail sheet with dimensions, construction notes, and technical clarity.'
+      }
+    ]
+  }
 };

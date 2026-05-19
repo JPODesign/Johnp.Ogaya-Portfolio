@@ -12,7 +12,7 @@ import {
   ZoomIn,
   ZoomOut
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import profileImage from './Assets/profile.jpg';
 import { portfolio } from './content';
 
@@ -26,6 +26,13 @@ const getProjectPages = (project) =>
     const page = String(index + 1).padStart(2, '0');
     return projectPreviewImages[`./Assets/projects/previews/${project.slug}/page-${page}.jpg`];
   }).filter(Boolean);
+
+const getSampleImage = (work) => {
+  const page = String(work.page).padStart(2, '0');
+  return projectPreviewImages[`./Assets/projects/previews/${work.slug}/page-${page}.jpg`];
+};
+
+const getNavId = (item) => item.toLowerCase().replace(/\s+/g, '-');
 
 const SectionLabel = ({ children }) => (
   <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-clay">
@@ -52,7 +59,7 @@ function Header() {
         </a>
         <div className="hidden items-center gap-7 md:flex">
           {portfolio.nav.map((item) => (
-            <a key={item} className="nav-link" href={`#${item.toLowerCase()}`}>
+            <a key={item} className="nav-link" href={`#${getNavId(item)}`}>
               {item}
             </a>
           ))}
@@ -73,7 +80,7 @@ function Header() {
               <a
                 key={item}
                 className="rounded-full px-3 py-2 text-sm text-ink transition hover:bg-linen"
-                href={`#${item.toLowerCase()}`}
+                href={`#${getNavId(item)}`}
                 onClick={() => setOpen(false)}
               >
                 {item}
@@ -382,6 +389,113 @@ function Projects() {
   );
 }
 
+function SampleWorks() {
+  const categories = Object.keys(portfolio.sampleWorks);
+  const [activeCategory, setActiveCategory] = useState(categories[0]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const works = portfolio.sampleWorks[activeCategory];
+  const activeWork = works[activeIndex];
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [activeCategory]);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % works.length);
+    }, 4800);
+
+    return () => window.clearInterval(timer);
+  }, [works.length, activeCategory]);
+
+  const goToWork = (index) => {
+    setActiveIndex((index + works.length) % works.length);
+  };
+
+  return (
+    <section id="sample-works" className="section-padding sample-works-section">
+      <div className="mx-auto max-w-6xl px-5">
+        <div className="mb-9 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-clay">
+              Sample Works
+            </p>
+            <h2 className="font-display text-4xl leading-tight text-ivory md:text-5xl">
+              Rotating design samples by category.
+            </h2>
+          </div>
+          <div className="lg:justify-self-end">
+            <label className="sample-select-label" htmlFor="sample-category">
+              Category
+            </label>
+            <select
+              id="sample-category"
+              className="sample-select"
+              value={activeCategory}
+              onChange={(event) => setActiveCategory(event.target.value)}
+            >
+              {categories.map((category) => (
+                <option value={category} key={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className="sample-carousel">
+          <button
+            type="button"
+            className="sample-arrow left-3"
+            onClick={() => goToWork(activeIndex - 1)}
+            aria-label="Previous sample work"
+          >
+            <ChevronLeft size={22} />
+          </button>
+          <article className="sample-card" key={`${activeCategory}-${activeWork.title}`}>
+            <div className="sample-image-wrap watermark-surface">
+              <img
+                src={getSampleImage(activeWork)}
+                alt={`${activeWork.title} sample work`}
+                draggable="false"
+                onContextMenu={(event) => event.preventDefault()}
+              />
+            </div>
+            <div className="sample-content">
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-clay">
+                {activeCategory}
+              </p>
+              <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
+                {activeWork.title}
+              </h3>
+              <p className="mt-4 leading-8 text-ivory/70">{activeWork.description}</p>
+              <div className="mt-6 flex items-center gap-2">
+                {works.map((work, index) => (
+                  <button
+                    type="button"
+                    className={`sample-dot ${index === activeIndex ? 'is-active' : ''}`}
+                    key={work.title}
+                    onClick={() => goToWork(index)}
+                    aria-label={`Show ${work.title}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </article>
+          <button
+            type="button"
+            className="sample-arrow right-3"
+            onClick={() => goToWork(activeIndex + 1)}
+            aria-label="Next sample work"
+          >
+            <ChevronRight size={22} />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Contact() {
   return (
     <section id="contact" className="section-padding bg-ink text-ivory">
@@ -431,6 +545,7 @@ export default function App() {
         <Skills />
         <Experience />
         <Projects />
+        <SampleWorks />
         <Contact />
       </main>
       <footer className="bg-ink px-5 pb-8 text-center text-sm text-ivory/55">

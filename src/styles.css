@@ -26,7 +26,7 @@ body {
 }
 
 section {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 7rem;
 }
 
 @layer components {
@@ -165,6 +165,58 @@ section {
 
   .lightbox-thumbnail img {
     @apply h-full w-full object-cover;
+  }
+
+  .sample-works-section {
+    @apply bg-ink text-ivory;
+    background:
+      radial-gradient(circle at top left, rgba(201, 143, 119, 0.18), transparent 28rem),
+      linear-gradient(135deg, #201c19 0%, #2e2a27 48%, #171411 100%);
+  }
+
+  .sample-select-label {
+    @apply mb-2 block text-xs font-semibold uppercase tracking-[0.22em] text-ivory/55;
+  }
+
+  .sample-select {
+    @apply w-full min-w-[15rem] rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-semibold text-ivory shadow-sm outline-none transition hover:border-clay focus:border-clay focus:ring-2 focus:ring-clay/30 lg:w-auto;
+  }
+
+  .sample-select option {
+    @apply bg-ink text-ivory;
+  }
+
+  .sample-carousel {
+    @apply relative;
+  }
+
+  .sample-card {
+    @apply grid overflow-hidden rounded-lg border border-white/10 bg-white/[0.07] shadow-[0_24px_70px_rgba(0,0,0,0.25)] backdrop-blur md:grid-cols-[1.15fr_0.85fr];
+    animation: fade-up 0.42s ease both;
+  }
+
+  .sample-image-wrap {
+    @apply relative aspect-[4/3] overflow-hidden bg-white/5 md:aspect-auto md:min-h-[31rem];
+  }
+
+  .sample-image-wrap img {
+    @apply h-full w-full object-cover transition duration-700;
+  }
+
+  .sample-content {
+    @apply flex min-h-[19rem] flex-col justify-center p-6 sm:p-8 lg:p-10;
+  }
+
+  .sample-arrow {
+    @apply absolute top-[42%] z-20 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-ink/80 text-ivory shadow-soft transition hover:border-clay hover:bg-clay md:top-1/2;
+  }
+
+  .sample-dot {
+    @apply h-2.5 w-2.5 rounded-full bg-ivory/30 transition hover:bg-clay;
+  }
+
+  .sample-dot.is-active {
+    @apply w-8 bg-clay;
   }
 
   .contact-link {
