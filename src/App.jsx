@@ -27,24 +27,7 @@ const getProjectPages = (project) =>
     return projectPreviewImages[`./Assets/projects/previews/${project.slug}/page-${page}.jpg`];
   }).filter(Boolean);
 
-const getSampleImage = (work) => {
-  if (!work.slug || !work.page) {
-    return null;
-  }
-
-  const page = String(work.page).padStart(2, '0');
-  return projectPreviewImages[`./Assets/projects/previews/${work.slug}/page-${page}.jpg`];
-};
-
 const getNavId = (item) => item.toLowerCase().replace(/\s+/g, '-');
-
-const getPlaceholderWorks = (category) =>
-  Array.from({ length: 3 }, (_, index) => ({
-    title: `${category} Sample ${index + 1}`,
-    description:
-      'Placeholder card reserved for future sample work. Add an image, title, and description in the sampleWorks data when ready.',
-    isPlaceholder: true
-  }));
 
 const SectionLabel = ({ children }) => (
   <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-clay">
@@ -240,8 +223,19 @@ function Projects() {
   const [activeProject, setActiveProject] = useState(null);
   const [activePage, setActivePage] = useState(0);
   const [zoom, setZoom] = useState(1);
+  const [carouselIndex, setCarouselIndex] = useState(0);
   const activePages = activeProject ? getProjectPages(activeProject) : [];
   const activeImage = activePages[activePage];
+  const carouselProject = portfolio.projects[carouselIndex];
+  const carouselPages = getProjectPages(carouselProject);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setCarouselIndex((index) => (index + 1) % portfolio.projects.length);
+    }, 5200);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   const openProject = (project) => {
     setActiveProject(project);
@@ -259,51 +253,87 @@ function Projects() {
     setZoom(1);
   };
 
-  return (
-    <section id="projects" className="section-padding">
-      <div className="mx-auto max-w-6xl px-5">
-        <SectionHeader
-          label="Projects"
-          title="Selected technical drawings and joinery works."
-          text="Selected renderings, production details, and technical drawing packages showcasing recent work completed"
-        />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {portfolio.projects.map((project) => {
-            const pages = getProjectPages(project);
+  const goToProject = (index) => {
+    setCarouselIndex((index + portfolio.projects.length) % portfolio.projects.length);
+  };
 
-            return (
-            <article className="project-card" key={project.title}>
+  return (
+    <section id="projects" className="section-padding project-showcase-section">
+      <div className="mx-auto max-w-6xl px-5">
+        <div className="mx-auto mb-10 max-w-3xl text-center">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-clay">
+            Projects
+          </p>
+          <h2 className="font-display text-4xl text-ivory md:text-5xl">
+            Rotating technical drawings and joinery works.
+          </h2>
+          <p className="mt-4 text-ivory/70">
+            Selected renderings, production details, and technical drawing packages showcasing recent work completed
+          </p>
+        </div>
+
+        <div className="project-carousel">
+          <button
+            type="button"
+            className="project-carousel-arrow left-3"
+            onClick={() => goToProject(carouselIndex - 1)}
+            aria-label="Previous project"
+          >
+            <ChevronLeft size={22} />
+          </button>
+          <article className="project-feature-card" key={carouselProject.title}>
+            <div className="project-feature-media">
               <button
                 type="button"
-                className="project-image watermark-surface"
-                onClick={() => openProject(project)}
-                aria-label={`Preview ${project.title}`}
+                className="project-feature-image watermark-surface"
+                onClick={() => openProject(carouselProject)}
+                aria-label={`Preview ${carouselProject.title}`}
               >
                 <img
-                  src={pages[0]}
-                  alt={`${project.title} preview`}
+                  src={carouselPages[0]}
+                  alt={`${carouselProject.title} preview`}
                   draggable="false"
                   onContextMenu={(event) => event.preventDefault()}
                 />
-                <span className="project-page-count">{pages.length} preview pages</span>
+                <span className="project-page-count">{carouselPages.length} preview pages</span>
               </button>
-              <div className="p-6">
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-clay">
-                  {project.category}
-                </p>
-                <h3 className="mt-3 text-2xl font-semibold text-ink">{project.title}</h3>
-                <p className="mt-3 leading-7 text-muted">{project.description}</p>
-                <button
-                  type="button"
-                  className="project-open-button"
-                  onClick={() => openProject(project)}
-                >
-                  Open Preview <ZoomIn size={17} />
-                </button>
+            </div>
+            <div className="project-feature-content">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-clay">
+                {carouselProject.category}
+              </p>
+              <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
+                {carouselProject.title}
+              </h3>
+              <p className="mt-4 leading-8 text-ivory/70">{carouselProject.description}</p>
+              <button
+                type="button"
+                className="project-open-button"
+                onClick={() => openProject(carouselProject)}
+              >
+                Open Preview <ZoomIn size={17} />
+              </button>
+              <div className="mt-6 flex flex-wrap items-center gap-2">
+                {portfolio.projects.map((project, index) => (
+                  <button
+                    type="button"
+                    className={`project-carousel-dot ${index === carouselIndex ? 'is-active' : ''}`}
+                    key={project.title}
+                    onClick={() => goToProject(index)}
+                    aria-label={`Show ${project.title}`}
+                  />
+                ))}
               </div>
-            </article>
-            );
-          })}
+            </div>
+          </article>
+          <button
+            type="button"
+            className="project-carousel-arrow right-3"
+            onClick={() => goToProject(carouselIndex + 1)}
+            aria-label="Next project"
+          >
+            <ChevronRight size={22} />
+          </button>
         </div>
       </div>
       {activeProject && (
@@ -401,127 +431,6 @@ function Projects() {
   );
 }
 
-function SampleWorks() {
-  const categories = Object.keys(portfolio.sampleWorks);
-  const [activeCategory, setActiveCategory] = useState(categories[0]);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const categoryWorks = portfolio.sampleWorks[activeCategory];
-  const hasWorks = categoryWorks.length > 0;
-  const works = hasWorks ? categoryWorks : getPlaceholderWorks(activeCategory);
-  const activeWork = works[activeIndex];
-  const activeImage = getSampleImage(activeWork);
-
-  useEffect(() => {
-    setActiveIndex(0);
-  }, [activeCategory]);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveIndex((index) => (index + 1) % works.length);
-    }, 4800);
-
-    return () => window.clearInterval(timer);
-  }, [works.length, activeCategory]);
-
-  const goToWork = (index) => {
-    setActiveIndex((index + works.length) % works.length);
-  };
-
-  return (
-    <section id="sample-works" className="section-padding sample-works-section">
-      <div className="mx-auto max-w-6xl px-5">
-        <div className="mb-9 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-          <div>
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-clay">
-              Sample Works
-            </p>
-            <h2 className="font-display text-4xl leading-tight text-ivory md:text-5xl">
-              Rotating design samples by category.
-            </h2>
-          </div>
-          <div className="lg:justify-self-end">
-            <label className="sample-select-label" htmlFor="sample-category">
-              Category
-            </label>
-            <select
-              id="sample-category"
-              className="sample-select"
-              value={activeCategory}
-              onChange={(event) => setActiveCategory(event.target.value)}
-            >
-              {categories.map((category) => (
-                <option value={category} key={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div className="sample-carousel">
-          <button
-            type="button"
-            className="sample-arrow left-3"
-            onClick={() => goToWork(activeIndex - 1)}
-            aria-label="Previous sample work"
-          >
-            <ChevronLeft size={22} />
-          </button>
-          <article className="sample-card" key={`${activeCategory}-${activeWork.title}`}>
-            <div className={`sample-image-wrap ${activeImage ? 'watermark-surface' : ''}`}>
-              {activeImage ? (
-                <img
-                  src={activeImage}
-                  alt={`${activeWork.title} sample work`}
-                  draggable="false"
-                  onContextMenu={(event) => event.preventDefault()}
-                />
-              ) : (
-                <div className="sample-placeholder-visual">
-                  <span>Sample image coming soon</span>
-                </div>
-              )}
-            </div>
-            <div className="sample-content">
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-clay">
-                {activeCategory}
-              </p>
-              <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
-                {activeWork.title}
-              </h3>
-              {activeWork.isPlaceholder && (
-                <p className="mt-3 inline-flex w-fit rounded-full border border-clay/50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-clay">
-                  Placeholder
-                </p>
-              )}
-              <p className="mt-4 leading-8 text-ivory/70">{activeWork.description}</p>
-              <div className="mt-6 flex items-center gap-2">
-                {works.map((work, index) => (
-                  <button
-                    type="button"
-                    className={`sample-dot ${index === activeIndex ? 'is-active' : ''}`}
-                    key={work.title}
-                    onClick={() => goToWork(index)}
-                    aria-label={`Show ${work.title}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </article>
-          <button
-            type="button"
-            className="sample-arrow right-3"
-            onClick={() => goToWork(activeIndex + 1)}
-            aria-label="Next sample work"
-          >
-            <ChevronRight size={22} />
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Contact() {
   return (
     <section id="contact" className="section-padding bg-ink text-ivory">
@@ -571,7 +480,6 @@ export default function App() {
         <Skills />
         <Experience />
         <Projects />
-        <SampleWorks />
         <Contact />
       </main>
       <footer className="bg-ink px-5 pb-8 text-center text-sm text-ivory/55">

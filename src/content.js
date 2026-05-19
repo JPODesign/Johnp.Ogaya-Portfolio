@@ -10,7 +10,7 @@ export const portfolio = {
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/john-paulo-ogaya-ab1517237/' },
     { label: 'WhatsApp', href: 'https://wa.me/639560375437' }
   ],
-  nav: ['About', 'Skills', 'Experience', 'Projects', 'Sample Works', 'Contact'],
+  nav: ['About', 'Skills', 'Experience', 'Projects', 'Contact'],
   about: {
     heading: 'About Me',
     body:
@@ -185,49 +185,5 @@ export const portfolio = {
       description:
         'Cornice and skirting detailing package for coordinated interior joinery installation.'
     }
-  ],
-  sampleWorks: {
-    Interior: [
-      {
-        title: 'Cafe Bar Joinery',
-        slug: 'cafe-bar',
-        page: 1,
-        description: 'Rendered joinery package with warm finishes and production-ready presentation sheets.'
-      },
-      {
-        title: 'Reception Desk Concept',
-        slug: 'reception-desk',
-        page: 1,
-        description: 'Clean front-of-house furniture detailing with measured views and material direction.'
-      },
-      {
-        title: 'Library Cabinet Design',
-        slug: 'library-cabinet',
-        page: 1,
-        description: 'Cabinetry presentation with refined proportions, storage planning, and build details.'
-      }
-    ],
-    Exterior: [],
-    Bathroom: [],
-    'Technical Detailing': [
-      {
-        title: 'Bed Frame Drawing Set',
-        slug: 'bed-frame',
-        page: 1,
-        description: 'Furniture technical package prepared for review, coordination, and fabrication handoff.'
-      },
-      {
-        title: 'Straight Wall Panel',
-        slug: 'straight-wall-panel',
-        page: 1,
-        description: 'Measured elevation and detail sample focused on proportions and build intent.'
-      },
-      {
-        title: 'Reception Desk Sheet',
-        slug: 'reception-desk',
-        page: 2,
-        description: 'Production detail sheet with dimensions, construction notes, and technical clarity.'
-      }
-    ]
-  }
+  ]
 };
