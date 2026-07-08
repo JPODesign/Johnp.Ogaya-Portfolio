@@ -99,6 +99,42 @@ export const portfolio = {
   ],
   projects: [
     {
+      title: 'Exterior Sample 1',
+      slug: 'exterior-1',
+      category: 'Exterior Design',
+      filterCategory: 'Exterior',
+      pageCount: 2,
+      description:
+        'Exterior visualization sample showing facade design, form, and presentation-ready views.'
+    },
+    {
+      title: 'Kitchen',
+      slug: 'kitchen',
+      category: 'Interior Design',
+      filterCategory: 'Interior',
+      pageCount: 2,
+      description:
+        'Kitchen interior sample with rendered views focused on cabinetry, finishes, and layout.'
+    },
+    {
+      title: 'Kitchen 2',
+      slug: 'kitchen-2',
+      category: 'Interior Design',
+      filterCategory: 'Interior',
+      pageCount: 2,
+      description:
+        'Second kitchen interior sample highlighting material direction, lighting, and space planning.'
+    },
+    {
+      title: 'Kitchen 3',
+      slug: 'kitchen-3',
+      category: 'Interior Design',
+      filterCategory: 'Interior',
+      pageCount: 2,
+      description:
+        'Third kitchen interior sample prepared as a clean visual preview for portfolio presentation.'
+    },
+    {
       title: 'Cafe Bar',
       slug: 'cafe-bar',
       category: 'Joinery Detail',

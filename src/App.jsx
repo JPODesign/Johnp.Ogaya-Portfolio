@@ -17,15 +17,29 @@ import { useEffect, useState } from 'react';
 import profileImage from './Assets/profile.jpg';
 import { portfolio } from './content';
 
-const projectPreviewImages = import.meta.glob('./Assets/projects/portfolio-previews/**/*.jpg', {
-  eager: true,
-  import: 'default'
-});
+const projectPreviewImages = {
+  ...import.meta.glob('./Assets/projects/portfolio-previews/**/*.jpg', {
+    eager: true,
+    import: 'default'
+  }),
+  ...import.meta.glob('./Assets/projects/previews/**/*.jpg', {
+    eager: true,
+    import: 'default'
+  }),
+  ...import.meta.glob('./Assets/projects/previews/**/*.png', {
+    eager: true,
+    import: 'default'
+  })
+};
 
 const getProjectPages = (project) =>
   Array.from({ length: project.pageCount }, (_, index) => {
     const page = String(index + 1).padStart(2, '0');
-    return projectPreviewImages[`./Assets/projects/portfolio-previews/${project.slug}/page-${page}.jpg`];
+    return (
+      projectPreviewImages[`./Assets/projects/portfolio-previews/${project.slug}/page-${page}.jpg`] ||
+      projectPreviewImages[`./Assets/projects/previews/${project.slug}/page-${page}.jpg`] ||
+      projectPreviewImages[`./Assets/projects/previews/${project.slug}/page-${page}.png`]
+    );
   }).filter(Boolean);
 
 const getNavId = (item) => item.toLowerCase().replace(/\s+/g, '-');
