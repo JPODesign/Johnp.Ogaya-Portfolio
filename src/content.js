@@ -79,7 +79,7 @@ export const portfolio = {
     },
     {
       title: 'CAD Designer/Cabinetry',
-      company: 'BW Interior (AMBB/Visiontech)',
+      company: 'BW Interior UAE (AMBB/Visiontech)',
       period: 'Mar 2017 - Mar 2021',
       details: [
         'Following specifications and calculations to create various technical drawings.',
