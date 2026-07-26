@@ -4,19 +4,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        linen: '#F7F1E8',
-        ivory: '#FFFCF6',
-        clay: '#C98F77',
-        moss: '#8A9478',
-        ink: '#2E2A27',
-        muted: '#766F68'
+        linen: 'var(--color-transition)',
+        ivory: 'var(--color-text)',
+        clay: 'var(--color-accent)',
+        moss: 'var(--color-accent-soft)',
+        ink: 'var(--color-text)',
+        muted: 'var(--color-muted)'
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         display: ['Fraunces', 'Georgia', 'serif']
       },
       boxShadow: {
-        soft: '0 18px 50px rgba(46, 42, 39, 0.09)'
+        soft: '0 18px 50px rgba(2, 6, 23, 0.28)'
       }
     }
   },

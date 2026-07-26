@@ -62,7 +62,7 @@ function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-ink/10 bg-ivory/85 backdrop-blur-xl">
+    <header className="site-header fixed left-0 right-0 top-0 z-50 border-b backdrop-blur-xl">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
         <a href="#home" className="font-display text-xl text-ink">
           {portfolio.name}
@@ -84,12 +84,12 @@ function Header() {
         </button>
       </nav>
       {open && (
-        <div className="border-t border-ink/10 bg-ivory px-5 py-4 md:hidden">
+        <div className="site-mobile-menu border-t px-5 py-4 md:hidden">
           <div className="mx-auto grid max-w-6xl gap-3">
             {portfolio.nav.map((item) => (
               <a
                 key={item}
-                className="rounded-full px-3 py-2 text-sm text-ink transition hover:bg-linen"
+                className="rounded-full px-3 py-2 text-sm text-ink transition hover:bg-[rgba(99,102,241,0.15)] hover:text-clay"
                 href={`#${getNavId(item)}`}
                 onClick={() => setOpen(false)}
               >
@@ -105,10 +105,10 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="home" className="section-padding pt-32 md:pt-40">
+    <section id="home" className="section-padding hero-section pt-32 md:pt-40">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-[1.08fr_0.92fr]">
         <div className="animate-fade-up">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/60 px-4 py-2 text-sm text-muted shadow-sm">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-muted shadow-sm backdrop-blur">
             <Sparkles size={16} className="text-clay" />
             {portfolio.role}
           </div>
@@ -149,7 +149,7 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" className="section-padding bg-ivory">
+    <section id="about" className="section-padding about-section">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-[0.85fr_1.15fr]">
         <div>
           <SectionLabel>{portfolio.about.heading}</SectionLabel>
@@ -175,7 +175,7 @@ function About() {
 
 function Skills() {
   return (
-    <section id="skills" className="section-padding">
+    <section id="skills" className="section-padding skills-section">
       <div className="mx-auto max-w-6xl px-5">
         <SectionHeader
           label="Tools I Use"
@@ -195,7 +195,7 @@ function Skills() {
 
 function Experience() {
   return (
-    <section id="experience" className="section-padding bg-ivory">
+    <section id="experience" className="section-padding experience-section">
       <div className="mx-auto max-w-5xl px-5">
         <SectionHeader label="Experience" title="Technical design, client support, and production detail." />
         <div className="space-y-5">
@@ -290,7 +290,7 @@ function Projects() {
           <h2 className="font-display text-4xl text-ivory md:text-5xl">
             Design, Rendering &amp; Technical Detailing
           </h2>
-          <p className="mt-4 text-ivory/70">
+          <p className="mt-4 text-[rgba(248,250,252,0.7)]">
             Selected renderings, production details, and technical drawing packages showcasing recent work completed
           </p>
           <div className="project-filter">
@@ -354,7 +354,7 @@ function Projects() {
                 <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
                   {carouselProject.title}
                 </h3>
-                <p className="mt-4 leading-8 text-ivory/70">{carouselProject.description}</p>
+                <p className="mt-4 leading-8 text-[rgba(248,250,252,0.7)]">{carouselProject.description}</p>
                 <button
                   type="button"
                   className="project-open-button"
@@ -393,7 +393,7 @@ function Projects() {
                 <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
                   Sample work placeholder
                 </h3>
-                <p className="mt-4 leading-8 text-ivory/70">
+                <p className="mt-4 leading-8 text-[rgba(248,250,252,0.7)]">
                   This category is ready for future uploaded previews. Add project images to the
                   project data and they will appear in this filtered carousel.
                 </p>
@@ -426,7 +426,7 @@ function Projects() {
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-clay">
                   {activeProject.filterCategory}
                 </p>
-                <p className="mt-1 text-sm text-ivory/55">{activeProject.category}</p>
+                <p className="mt-1 text-sm text-[rgba(248,250,252,0.55)]">{activeProject.category}</p>
                 <h3 className="mt-1 text-2xl font-semibold text-ivory">{activeProject.title}</h3>
               </div>
               <div className="flex items-center gap-2">
@@ -485,7 +485,7 @@ function Projects() {
               </button>
             </div>
             <div className="lightbox-footer">
-              <span className="text-sm font-medium text-ivory/70">
+              <span className="text-sm font-medium text-[rgba(248,250,252,0.7)]">
                 Page {activePage + 1} of {activePages.length}
               </span>
               <div className="lightbox-thumbnails">
@@ -516,14 +516,14 @@ function Projects() {
 
 function Contact() {
   return (
-    <section id="contact" className="section-padding bg-ink text-ivory">
+    <section id="contact" className="section-padding contact-section text-ivory">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-[1fr_0.85fr]">
         <div>
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-clay">
             Contact
           </p>
           <h2 className="font-display text-4xl md:text-5xl">Let us build something clear and memorable.</h2>
-          <p className="mt-5 max-w-xl leading-8 text-ivory/75">
+          <p className="mt-5 max-w-xl leading-8 text-[rgba(248,250,252,0.75)]">
             Open to freelance projects, collaborations, and creative opportunities. Let&apos;s create something exceptional together.
           </p>
         </div>
@@ -565,7 +565,7 @@ export default function App() {
         <Projects />
         <Contact />
       </main>
-      <footer className="bg-ink px-5 pb-8 text-center text-sm text-ivory/55">
+      <footer className="site-footer px-5 pb-8 text-center text-sm text-[rgba(248,250,252,0.55)]">
         Copyright {new Date().getFullYear()} {portfolio.name}. All rights reserved.
       </footer>
     </>
