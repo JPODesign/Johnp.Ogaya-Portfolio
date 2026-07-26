@@ -165,7 +165,7 @@ export const portfolio = {
       title: 'Reception Desk',
       slug: 'reception-desk',
       category: 'Furniture Detail',
-      filterCategory: 'Interior',
+      filterCategory: 'Technical Drawings',
       pageCount: 4,
       description:
         'Reception desk design package combining clean rendered visuals with measured construction drawings.'
@@ -192,7 +192,7 @@ export const portfolio = {
       title: 'Open Bookcase',
       slug: 'open-bookcase',
       category: 'Cabinetry Detail',
-      filterCategory: 'Interior',
+      filterCategory: 'Technical Drawings',
       pageCount: 4,
       description:
         'Open bookcase design package showing proportions, shelving layout, and construction details.'
@@ -237,7 +237,7 @@ export const portfolio = {
       title: 'Cornice and Skirting',
       slug: 'cornice-skirting',
       category: 'Interior Detail',
-      filterCategory: 'Interior',
+      filterCategory: 'Technical Drawings',
       pageCount: 2,
       description:
         'Cornice and skirting detailing package for coordinated interior joinery installation.'
