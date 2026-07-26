@@ -318,7 +318,7 @@ function Projects() {
         <div className="project-carousel">
           <button
             type="button"
-            className="project-carousel-arrow left-3"
+            className="project-carousel-arrow project-carousel-arrow-left"
             onClick={() => goToProject(carouselIndex - 1)}
             disabled={!carouselProject}
             aria-label="Previous project"
@@ -409,7 +409,7 @@ function Projects() {
           )}
           <button
             type="button"
-            className="project-carousel-arrow right-3"
+            className="project-carousel-arrow project-carousel-arrow-right"
             onClick={() => goToProject(carouselIndex + 1)}
             disabled={!carouselProject}
             aria-label="Next project"
