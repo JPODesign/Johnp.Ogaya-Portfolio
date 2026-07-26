@@ -135,6 +135,15 @@ export const portfolio = {
         'Third kitchen interior sample prepared as a clean visual preview for portfolio presentation.'
     },
     {
+      title: 'Humanly Reception',
+      slug: 'humanly-reception',
+      category: 'Interior Design',
+      filterCategory: 'Interior',
+      pageCount: 10,
+      description:
+        'Reception interior drawing package converted from PDF into preview pages for portfolio presentation.'
+    },
+    {
       title: 'Cafe Bar',
       slug: 'cafe-bar',
       category: 'Joinery Detail',
