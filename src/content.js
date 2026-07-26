@@ -5,10 +5,11 @@ export const portfolio = {
     'I believe that good architectural or technical design is not just about creating an intelligent blend of style, form and function. It is also a form of storytelling.',
   location: 'Caloocan, Philippines',
   email: 'johnp.ogaya@gmail.com',
-  phoneNumbers: ['+639560375437', '+639493075755'],
+  phoneNumbers: ['+639493075755'],
   socials: [
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/john-paulo-ogaya-ab1517237/' },
-    { label: 'WhatsApp', href: 'https://wa.me/639560375437' }
+    { label: 'WhatsApp', href: 'https://wa.me/639493075755' },
+    { label: 'Telegram', href: 'tg://resolve?phone=639493075755' }
   ],
   nav: ['About', 'Skills', 'Experience', 'Projects', 'Contact'],
   projectCategories: ['Interior', 'Exterior', 'Bathroom', 'Technical Drawings'],
