@@ -25,6 +25,7 @@ export const portfolio = {
   skills: [
     'AutoCAD',
     'SketchUp',
+    'Blender',
     'D5 Render',
     'Unreal Engine',
     'Photoshop',
