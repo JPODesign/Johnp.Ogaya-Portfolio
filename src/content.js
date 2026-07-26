@@ -145,6 +145,15 @@ export const portfolio = {
         'Reception interior drawing package converted from PDF into preview pages for portfolio presentation.'
     },
     {
+      title: 'Pop of Sugar',
+      slug: 'pop-of-sugar',
+      category: 'Technical Detail',
+      filterCategory: 'Technical Drawings',
+      pageCount: 2,
+      description:
+        'Modular product case technical drawing package with plan, elevation, section, and isometric details.'
+    },
+    {
       title: 'Cafe Bar',
       slug: 'cafe-bar',
       category: 'Joinery Detail',
