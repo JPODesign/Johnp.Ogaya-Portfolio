@@ -64,8 +64,8 @@ function Header() {
   return (
     <header className="site-header fixed left-0 right-0 top-0 z-50 border-b backdrop-blur-xl">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a href="#home" className="font-display text-xl text-ink">
-          {portfolio.name}
+        <a href="#home" className="brand-mark" aria-label={`${portfolio.name} home`}>
+          J.
         </a>
         <div className="hidden items-center gap-7 md:flex">
           {portfolio.nav.map((item) => (
@@ -89,7 +89,7 @@ function Header() {
             {portfolio.nav.map((item) => (
               <a
                 key={item}
-                className="rounded-full px-3 py-2 text-sm text-ink transition hover:bg-[rgba(99,102,241,0.15)] hover:text-clay"
+                className="rounded-full px-3 py-2 text-sm font-medium text-ink transition hover:bg-[rgba(176,138,74,0.12)] hover:text-clay"
                 href={`#${getNavId(item)}`}
                 onClick={() => setOpen(false)}
               >
@@ -108,12 +108,12 @@ function Hero() {
     <section id="home" className="section-padding hero-section pt-32 md:pt-40">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-[1.08fr_0.92fr]">
         <div className="animate-fade-up">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-muted shadow-sm backdrop-blur">
+          <div className="hero-kicker">
             <Sparkles size={16} className="text-clay" />
             {portfolio.role}
           </div>
           <h1 className="max-w-3xl font-display text-5xl leading-tight text-ink md:text-7xl">
-            Hi, I am {portfolio.name}.
+            Hi, I am {portfolio.name}<span className="text-clay">.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
             {portfolio.intro}
@@ -287,10 +287,10 @@ function Projects() {
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-clay">
             Projects
           </p>
-          <h2 className="font-display text-4xl text-ivory md:text-5xl">
+          <h2 className="font-display text-4xl text-ink md:text-5xl">
             Design, Rendering &amp; Technical Detailing
           </h2>
-          <p className="mt-4 text-[rgba(248,250,252,0.7)]">
+          <p className="mt-4 text-muted">
             Selected renderings, production details, and technical drawing packages showcasing recent work completed
           </p>
           <div className="project-filter">
@@ -351,10 +351,10 @@ function Projects() {
                   <span className="project-category-tag">{carouselProject.filterCategory}</span>
                   <span className="project-category-meta">{carouselProject.category}</span>
                 </div>
-                <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
+                <h3 className="mt-3 font-display text-3xl text-ink md:text-4xl">
                   {carouselProject.title}
                 </h3>
-                <p className="mt-4 leading-8 text-[rgba(248,250,252,0.7)]">{carouselProject.description}</p>
+                <p className="mt-4 leading-8 text-muted">{carouselProject.description}</p>
                 <button
                   type="button"
                   className="project-open-button"
@@ -390,10 +390,10 @@ function Projects() {
                   <span className="project-category-tag">{activeCategory}</span>
                   <span className="project-category-meta">Portfolio preview</span>
                 </div>
-                <h3 className="mt-3 font-display text-3xl text-ivory md:text-4xl">
+                <h3 className="mt-3 font-display text-3xl text-ink md:text-4xl">
                   Sample work placeholder
                 </h3>
-                <p className="mt-4 leading-8 text-[rgba(248,250,252,0.7)]">
+                <p className="mt-4 leading-8 text-muted">
                   This category is ready for future uploaded previews. Add project images to the
                   project data and they will appear in this filtered carousel.
                 </p>
@@ -516,18 +516,18 @@ function Projects() {
 
 function Contact() {
   return (
-    <section id="contact" className="section-padding contact-section text-ivory">
+    <section id="contact" className="section-padding contact-section text-ink">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-[1fr_0.85fr]">
         <div>
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-clay">
             Contact
           </p>
           <h2 className="font-display text-4xl md:text-5xl">Let us build something clear and memorable.</h2>
-          <p className="mt-5 max-w-xl leading-8 text-[rgba(248,250,252,0.75)]">
+          <p className="mt-5 max-w-xl leading-8 text-muted">
             Open to freelance projects, collaborations, and creative opportunities. Let&apos;s create something exceptional together.
           </p>
         </div>
-        <div className="rounded-lg border border-white/10 bg-white/5 p-6">
+        <div className="contact-panel">
           <div className="flex flex-wrap gap-3">
             <a className="contact-link" href={`mailto:${portfolio.email}`}>
               <Mail size={19} />
@@ -565,7 +565,7 @@ export default function App() {
         <Projects />
         <Contact />
       </main>
-      <footer className="site-footer px-5 pb-8 text-center text-sm text-[rgba(248,250,252,0.55)]">
+      <footer className="site-footer px-5 pb-8 text-center text-sm text-muted">
         Copyright {new Date().getFullYear()} {portfolio.name}. All rights reserved.
       </footer>
     </>
